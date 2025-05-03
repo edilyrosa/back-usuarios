@@ -5,7 +5,7 @@ dotenv.config();
 
 // Ahora puedes acceder a las variables con process.env
 const supabaseUrl = process.env.SUPABASE_URL
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY
+const supabaseAnonKey = process.env.SUPABASE_SERVICE_ROLE
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
