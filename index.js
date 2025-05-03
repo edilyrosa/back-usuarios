@@ -1,0 +1,27 @@
+import { supabase } from './supabaseClient.js'
+import express from "express";
+import cors from 'cors';
+
+const app = express()
+const PORT = 3000
+
+app.use(express.json()); // Parsear JSON en las peticiones
+app.use(cors()); // Habilitar CORS para todos los orígenes
+
+
+app.get('/usuarios', async (req, res) => {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .select('*')  // Selecciona todas las columnas
+  
+    if (error) {
+      console.error('Error al obtener usuarios:', error)
+      return res.status(500).send('Error al obtener usuarios')
+    }
+  
+    res.json(data) // Envía los usuarios como JSON
+  })
+
+app.listen(PORT, ()=>{
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+})
